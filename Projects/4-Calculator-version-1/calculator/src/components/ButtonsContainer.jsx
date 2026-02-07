@@ -23,7 +23,7 @@ const ButtonsContainer = () => {
   return (
     <div className={styles.buttonscontainer}>
       {buttoonNames.map((buttonName) => (
-        <button className={styles.button}>C</button>
+        <button className={styles.button}>{buttonName}</button>
       ))}
     </div>
   );
