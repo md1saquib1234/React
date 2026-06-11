@@ -20,6 +20,10 @@ function App() {
     { name: 'Go to Gym',
       dueDate: '4/10/2023',
     },
+    {
+      name: 'Go to Market',
+      dueDate: '4/10/2023',
+    }
   ];
 
   return (
