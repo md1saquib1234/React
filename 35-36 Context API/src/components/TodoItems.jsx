@@ -5,7 +5,8 @@ import styles from './TodoItems.module.css';
 
 const TodoItems = ({onDeleteClick}) => {
   
-  const todoItems = useContext(TodoItemsContext);
+  const {todoItems} = useContext(TodoItemsContext);
+  
   
 
   return (
@@ -14,7 +15,7 @@ const TodoItems = ({onDeleteClick}) => {
          <TodoItem 
         todoDate={item.dueDate} 
         todoName={item.name}
-         onDeleteClick={onDeleteClick}
+         
          ></TodoItem>)}      
         </div>
   );

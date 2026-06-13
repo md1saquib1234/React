@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import AppName from "./components/AppName";
@@ -10,35 +10,68 @@ import "./App.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { TodoItemsContext } from "./store/todo-items-store";
+
+const todoItemsReducer = (currTodoItems, action) => {
+
+  let newTodoItems = currTodoItems;
+  if (action.type === 'NEW_ITEM' ) {
+    newTodoItems = [
+      ...currTodoItems,
+      {
+        name: action.payload.itemName, dueDate: action.payload.itemDueDate
+      },
+    ];
+
+  } else if (action.type === 'DELETE_ITEM') {
+
+  }
+  return newTodoItems;
+}
+
+
 function App() {
   
  
 
-  const [todoItems, setTodoItems] = useState([]);
+ // const [todoItems, setTodoItems] = useState([]);
+  const [todoItems, dispatchTodoItems] = useReducer(todoItemsReducer, []);
 
-  const handleNewItem = (itemName, itemDueDate) => {  
-      setTodoItems((currValue) => 
-      [...todoItems,
-       {name: itemName, dueDate: itemDueDate},
-      ]);
+  const addNewItem = (itemName, itemDueDate) => { 
+    const newItemAction = {
+      type: "New_ITEM",
+      payload: {
+        itemName,
+        itemDueDate
+      }
+    };
+    dispatchTodoItems(newItemAction);
+    
+
+
+      // setTodoItems((currValue) => 
+      // [...todoItems,
+      //  {name: itemName, dueDate: itemDueDate},
+      // ]);
   }
 
-  const handleDeleteItem = (todoItemName) => {
+  const deleteItem = (todoItemName) => {
     const newTodoItems = todoItems.filter(item => item.name !== todoItemName);
     setTodoItems(newTodoItems);
   };
 
-  const defaultTodoItems = [{name: "Buy ghee", dueDate: "Yesterday"}]
+  const defaultTodoItems = [{name: "Sky Diving" , dueDate: "Today"}]
 
   return (
-    <TodoItemsContext.Provider value={defaultTodoItems}>
+    <TodoItemsContext.Provider value={{
+      todoItems,
+      addNewItem,
+      deleteItem,
+      }}>
     <center className="todo-container">
        <AppName></AppName>
-        <AddTodo onNewItem={handleNewItem}></AddTodo>
-        <WelcomeMessage todoItems={todoItems}></WelcomeMessage>
+        <AddTodo></AddTodo>
+        <WelcomeMessage ></WelcomeMessage>
         <TodoItems
-         todoItems={todoItems} 
-         onDeleteClick={handleDeleteItem}
          ></TodoItems>     
     </center>
     </TodoItemsContext.Provider>
