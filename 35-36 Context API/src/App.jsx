@@ -9,6 +9,7 @@ import TodoItems from "./components/TodoItems";
 import "./App.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import { TodoItemsContext } from "./store/todo-items-store";
 function App() {
   
  
@@ -25,19 +26,22 @@ function App() {
   const handleDeleteItem = (todoItemName) => {
     const newTodoItems = todoItems.filter(item => item.name !== todoItemName);
     setTodoItems(newTodoItems);
+  };
 
-  }
+  const defaultTodoItems = [{name: "Buy ghee", dueDate: "Yesterday"}]
 
   return (
+    <TodoItemsContext.Provider value={defaultTodoItems}>
     <center className="todo-container">
        <AppName></AppName>
         <AddTodo onNewItem={handleNewItem}></AddTodo>
-        {todoItems.length === 0 && <WelcomeMessage ></WelcomeMessage>}
-        <TodoItems todoItems={todoItems} onDeleteClick={handleDeleteItem}></TodoItems>
-        
-       
-      
+        <WelcomeMessage todoItems={todoItems}></WelcomeMessage>
+        <TodoItems
+         todoItems={todoItems} 
+         onDeleteClick={handleDeleteItem}
+         ></TodoItems>     
     </center>
+    </TodoItemsContext.Provider>
   );
 }
 
