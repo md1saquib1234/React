@@ -26,7 +26,7 @@ const todoItemsReducer = (currTodoItems, action) => {
 
   }
   return newTodoItems;
-}
+};
 
 
 function App() {
@@ -52,7 +52,7 @@ function App() {
       // [...todoItems,
       //  {name: itemName, dueDate: itemDueDate},
       // ]);
-  }
+  };
 
   const deleteItem = (todoItemName) => {
     const newTodoItems = todoItems.filter(item => item.name !== todoItemName);
