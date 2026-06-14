@@ -7,20 +7,10 @@ import TodoItem from "./components/TodoItem";
 import WelcomeMessage from "./components/WelcomeMessage";
 import TodoItems from "./components/TodoItems";
 import "./App.css";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import TodoItemsContextProvider, { TodoItemsContext } from "./store/todo-items-store";
 
-
-
-
 function App() {
-  
- 
-
- 
- 
-
   return (
     <TodoItemsContextProvider>
     <center className="todo-container">
