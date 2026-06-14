@@ -16,7 +16,7 @@ function AddTodo() {
   event.preventDefault();
   const todoName = todoNameElement.current.value;
   const dueDate = dueDateElement.current.value;
-  console.log(`${todoName} due on: ${dueDate}`);
+  // console.log(`${todoName} due on: ${dueDate}`);
   todoNameElement.current.value = "";
   dueDateElement.current.value = "";
   addNewItem(todoName, dueDate);
