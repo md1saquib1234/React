@@ -1,15 +1,10 @@
 import { createContext, useReducer } from "react";
 
-
-
-const PostList = createContext(
-  {
+export const PostList = createContext({
 postList: [],
 addPost: () => {},
 deletePost: () => {},
-
-}
-);
+});
 
 const postListReducer = (currPostList, action) => {
   return currPostList;
@@ -25,19 +20,13 @@ const PostListProvider = ({children}) => {
 
   }
 
-  const deletPost = () => {
+  const deletePost = () => {
 
   }
 
 
 
-  return <PostList.Provider value={{
-    postList,
-    addPost,
-    deletPost,
-  }
-
-  }
+  return <PostList.Provider value={{postList, addPost, deletePost}}
   >{children}
     </PostList.Provider>
 

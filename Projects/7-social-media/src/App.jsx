@@ -10,7 +10,7 @@ import PostListProvider from "./store/post-list-store";
 
 function App() {
 
-  const [selectedTab, setSeletedTab] = useState("CreatePost");
+  const [selectedTab, setSeletedTab] = useState("Home");
 
 
   
