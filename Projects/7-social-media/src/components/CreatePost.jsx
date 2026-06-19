@@ -1,15 +1,38 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
+import {PostList} from "../store/post-list-store"
 
 const CreatePost = () => {
+
+  const {addPost} = useContext(PostList);
   
-  const userId = useRef();
-  const postTitle = useRef();
-  const postBody = useRef();
-  const reactions = useRef();
-  const tags = useRef();
+  const userIdElement = useRef();
+  const postTitleElement = useRef();
+  const postBodyElement = useRef();
+  const reactionsElement = useRef();
+  const tagsElement = useRef();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const userId = userIdElement.current.value;
+    const postTitle = postTitleElement.current.value;
+    const postBody = postBodyElement.current.value;
+    const reactions = reactionsElement.current.value;
+    const tags = tagsElement.current.value.split(" ");
+
+    userIdElement.current.value = "";
+    postTitleElement.current.value = "";
+    postBodyElement.current.value = "";
+    reactionsElement.current.value = "";
+    tagsElement.current.value = "";
+
+
+
+    addPost(userId, postTitle, postBody, reactions, tags);
+
+  };
 
   return (
-    <form className="create-post">
+    <form className="create-post" onSubmit={handleSubmit}>
 
       <div className="mb-3">
         <label htmlFor="userId" className="form-label">
@@ -19,7 +42,7 @@ const CreatePost = () => {
           type="text"
           className="form-control"
           id="userId"
-          ref={userId}
+          ref={userIdElement}
           placeholder="Your User Id"
         />
       </div>
@@ -32,7 +55,7 @@ const CreatePost = () => {
           type="text"
           className="form-control"
           id="title"
-          ref={postTitle}
+          ref={postTitleElement}
           placeholder="How are you feeling today..."
         />
       </div>
@@ -45,7 +68,7 @@ const CreatePost = () => {
           type="text"
           className="form-control"
           id="body"
-          ref={postBody}
+          ref={postBodyElement}
           placeholder="Tell us more about it"
         />
       </div>
@@ -58,7 +81,7 @@ const CreatePost = () => {
           type="text"
           className="form-control"
           id="reactions"
-          ref={reactions}
+          ref={reactionsElement}
           placeholder="How many people reacted to this post"
         />
       </div>
@@ -71,7 +94,7 @@ const CreatePost = () => {
           type="text"
           className="form-control"
           id="tags"
-          ref={tags}
+          ref={tagsElement}
           placeholder="Please enter tags using space"
         />
       </div>
