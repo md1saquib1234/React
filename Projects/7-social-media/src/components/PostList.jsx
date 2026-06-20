@@ -12,21 +12,27 @@ const PostList = () => {
  
  useEffect(() => {
   setFetching(true);
-  console.log("fetch started");
-  fetch('https://dummyjson.com/posts')
+  
+  const controller = new AbortController();
+  const signal = controller.signal;
+
+  fetch('https://dummyjson.com/posts', { signal })
 .then(res => res.json())
 .then(data => {
   addInitialPosts(data.posts);
   setFetching(false);
-  console.log("fetch returned");
  });
-  console.log("fetch ended");
+  
+ return () => {
+  console.log("Cleaning up UseEffect.");
+  controller.abort();
+ }
  }, []);
 
 
   return (
   <>
-  {/* {fetching &&*/  <LoadingSpinner/>} 
+   {fetching &&  <LoadingSpinner/>} 
   {
     !fetching &&
     postList.length === 0 && <WelcomeMessage />
