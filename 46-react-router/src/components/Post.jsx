@@ -19,7 +19,8 @@ const Post = ({ post }) => {
         </h5>
         <p className="card-text">{post.body}</p>
         <div className="alert alert-success" role="alert">
-          This post has been reacted by {post.reactions.likes} people.
+          This post has been reacted by {typeof 
+          post.reactions === 'object' ? post.reactions.likes : post.reactions || 0 } people.
         </div>
         {post.tags.map((tag) => (
           <span key={tag} className="badge text-bg-primary hashtag">{tag}</span>
